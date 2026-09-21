@@ -1,3 +1,4 @@
+
 import re
 from functools import partial
 from pathlib import Path
@@ -25,16 +26,37 @@ st.set_page_config(
 st.markdown(
     """
     <style>
+    /* ---------- Base ---------- */
+    .stApp {
+        background: #ffffff;
+        color: #16181d;
+    }
+
     .block-container {
         max-width: 1380px;
-        padding-top: 2.5rem;
+        padding-top: 2.25rem;
         padding-bottom: 4rem;
     }
 
-    .stApp {
-        background: #ffffff;
+    /* ---------- Force readable text on light background ---------- */
+    h1, h2, h3, h4, h5, h6,
+    p, li, label,
+    [data-testid="stMarkdownContainer"],
+    [data-testid="stCaptionContainer"],
+    [data-testid="stText"],
+    [data-testid="stHeader"] {
+        color: #16181d !important;
     }
 
+    [data-testid="stCaptionContainer"] {
+        color: #667085 !important;
+    }
+
+    a {
+        color: #16181d !important;
+    }
+
+    /* ---------- Headings ---------- */
     h1, h2, h3 {
         letter-spacing: -0.02em;
     }
@@ -52,57 +74,142 @@ st.markdown(
         font-size: 1.35rem !important;
     }
 
+    /* ---------- Project metadata ---------- */
     .project-meta {
-        color: #6b7280;
+        color: #667085 !important;
         font-size: 0.95rem;
         margin-top: -0.35rem;
         margin-bottom: 1.2rem;
     }
 
     .project-label {
-        color: #6b7280;
-        font-size: 0.82rem;
+        color: #667085 !important;
+        font-size: 0.78rem;
         text-transform: uppercase;
-        letter-spacing: 0.08em;
+        letter-spacing: 0.09em;
         margin-bottom: 0.25rem;
     }
 
+    /* ---------- Home ---------- */
     .hero-note {
-        color: #6b7280;
+        color: #4b5563 !important;
         font-size: 1rem;
         line-height: 1.7;
     }
 
     .category-card {
         border: 1px solid #e5e7eb;
-        border-radius: 12px;
-        padding: 1.2rem;
+        border-radius: 14px;
+        padding: 1.25rem;
         height: 100%;
         background: #fafafa;
     }
 
     .category-number {
-        color: #9ca3af;
+        color: #9ca3af !important;
         font-size: 0.8rem;
         letter-spacing: 0.1em;
         margin-bottom: 0.5rem;
     }
 
     .category-title {
+        color: #16181d !important;
         font-size: 1.15rem;
         font-weight: 600;
         margin-bottom: 0.5rem;
     }
 
     .category-text {
-        color: #6b7280;
+        color: #667085 !important;
         line-height: 1.55;
         font-size: 0.92rem;
     }
 
+    /* ---------- Project journey ---------- */
+    .journey-shell {
+        padding: 0.5rem 0 0.75rem 0;
+    }
+
+    .journey-stage {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        perspective: 1400px;
+        margin-top: 0.4rem;
+        margin-bottom: 0.8rem;
+    }
+
+    .journey-caption {
+        text-align: center;
+        color: #667085 !important;
+        font-size: 0.82rem;
+        margin-top: 0.35rem;
+        margin-bottom: 0.8rem;
+    }
+
+    /* Streamlit places the actual image inside this test-id. */
+    [data-testid="stImage"] {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+
+    [data-testid="stImage"] img {
+        max-width: min(860px, 100%) !important;
+        max-height: 70vh;
+        width: auto !important;
+        height: auto !important;
+        object-fit: contain;
+        background: #ffffff;
+        border: 1px solid #e5e7eb;
+        border-radius: 4px;
+        box-shadow:
+            0 18px 45px rgba(17, 24, 39, 0.10),
+            0 3px 10px rgba(17, 24, 39, 0.05);
+        transform-origin: left center;
+        backface-visibility: hidden;
+        animation: pageFlipIn 0.42s ease-out;
+    }
+
+    @keyframes pageFlipIn {
+        0% {
+            opacity: 0;
+            transform: perspective(1400px) rotateY(-18deg) translateX(-18px);
+        }
+        100% {
+            opacity: 1;
+            transform: perspective(1400px) rotateY(0deg) translateX(0);
+        }
+    }
+
+    .journey-progress {
+        text-align: center;
+        color: #667085 !important;
+        font-size: 0.82rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin-bottom: 0.4rem;
+    }
+
+    .journey-file {
+        text-align: center;
+        color: #98a2b3 !important;
+        font-size: 0.78rem;
+        margin-bottom: 1rem;
+        word-break: break-word;
+    }
+
+    /* ---------- Buttons ---------- */
+    div.stButton > button {
+        border-radius: 999px;
+        min-height: 2.6rem;
+    }
+
+    /* ---------- Footer ---------- */
     .footer {
-        color: #9ca3af;
-        font-size: 0.85rem;
+        color: #98a2b3 !important;
+        font-size: 0.82rem;
         padding-top: 1rem;
         padding-bottom: 1rem;
     }
@@ -120,16 +227,14 @@ DATA_DIR = Path(__file__).parent / "data"
 
 PROFILE = {
     "name": "Nguyễn Nhật Minh Thư",
-    "headline": "Urban Design student | University of Architecture of Ho Chi Minh City",
+    "headline": "Year 4 Urban Design student | University of Architecture of Ho Chi Minh City (UAH)",
     "pitch": (
-        "A spatial and design-oriented portfolio with work across urban design, "
-        "urban analysis and infrastructure, complemented by training in Data Science "
-        "and Machine Learning."
+        "Strong spatial and design foundation, a clear interest in urban transformation, "
+        "and hands-on exposure to data science."
     ),
     "looking_for": "Internship or student position in urban design and planning",
     "location": "Ho Chi Minh City, Vietnam",
     "email": "nguyennhatminhthu19@gmail.com",
-    # Add your LinkedIn URL here when ready.
     "linkedin": "",
     "cv_file": DATA_DIR / "CV.pdf",
     "cover_image": DATA_DIR / "TKDT2" / "1.png",
@@ -141,26 +246,17 @@ PROFILE = {
 # =====================================================================
 
 PROJECTS = {
-
-    # -----------------------------------------------------------------
-    # DESIGN
-    # -----------------------------------------------------------------
-
     "DA_BCKG": {
-        "title": "Spatial Composition",
-        "meta": "Concept Design Studio | UAH",
-        "summary": (
-            "A concept-focused design exercise exploring how spatial ideas are "
-            "developed from an initial reading into a coherent composition. "
-            "The work focuses on relationships between movement, space, hierarchy and form."
-        ),
+        "title": "CONCEPT: Đồ Án Bố cục không gian - Spatial Concept project",
+        "meta": "Concept design studio | UAH | 2025",
+        "summary": "TODO: 2-3 sentences on the site, the problem, and the core concept.",
         "highlights": [
-            "Developed a design concept through spatial reading and composition.",
-            "Explored hierarchy and relationships between different spatial elements.",
-            "Translated conceptual thinking into drawings, models and architectural representation.",
+            "TODO: key design move 1",
+            "TODO: key design move 2",
+            "TODO: key design move 3",
         ],
-        "role": "Individual academic project",
-        "tools": "AutoCAD, SketchUp, Adobe Photoshop, Adobe Illustrator",
+        "role": "TODO: individual or group of N, and what you did",
+        "tools": "TODO: e.g. AutoCAD, SketchUp, Photoshop",
         "link": "",
         "folder": "DA_BCKG",
         "files": [
@@ -170,104 +266,67 @@ PROJECTS = {
             "BCKG4.pdf",
             "BCKG5.pdf",
         ],
-        "columns": 1,
     },
 
+    # Phan Xich Long is split into 2 cards so the boards are not repeated.
     "TKDT2_DESIGN": {
-        "title": "Phan Slip Long",
-        "meta": "Urban Design Studio 2 | Urban Design Proposal | UAH",
-        "summary": (
-            "A neighbourhood-scale urban design proposal in Phan Xích Long that "
-            "looks at how restaurants, movement and street edges shape everyday public life. "
-            "The proposal asks how the existing street condition can create more opportunities "
-            "for people to stay, rather than only pass through."
-        ),
+        "title": "Phan Xích Long: Urban Design Proposal",
+        "meta": "Urban Design Studio 2 | UAH | TODO: year",
+        "summary": "TODO: 2-3 sentences on your proposal and the main idea behind it.",
         "highlights": [
-            "Developed the concept around enhancing existing walls and interrupting visual consistency.",
-            "Proposed a linear underground public layer as an extension of the street experience.",
-            "Introduced small public pockets for different forms of lingering, including elderly users, children and teenagers.",
-            "Used a central skylight / glass strip to maintain a visual relationship with the street above.",
+            "TODO: design strategy",
+            "TODO: key spatial intervention",
+            "TODO: what changes for people using the street",
         ],
-        "role": "Individual academic project",
-        "tools": "AutoCAD, SketchUp, Adobe Photoshop, Adobe Illustrator",
+        "role": "TODO: individual or group of N, and what you did",
+        "tools": "TODO",
         "link": "",
         "folder": "TKDT2",
-        "files": [
-            "3.png",
-            "4.png",
-            "5.png",
-            "6.png",
-        ],
-        "columns": 1,
+        "files": ["3.png", "4.png", "5.png", "6.png"],
     },
-
-    # -----------------------------------------------------------------
-    # URBAN ANALYSIS
-    # -----------------------------------------------------------------
 
     "TKDT2_ANALYSIS": {
         "title": "Phan Xích Long: Site Analysis",
-        "meta": "Urban Design Studio 2 | Urban Analysis | UAH",
-        "summary": (
-            "The analysis examines how Phan Xích Long works as an everyday urban environment, "
-            "looking at movement, eating, parking, gathering and staying. "
-            "These observations were used to identify opportunities for the later design intervention."
-        ),
+        "meta": "Urban Design Studio 2 | UAH | TODO: year",
+        "summary": "TODO: 2-3 sentences on how the area works today and how it is changing.",
         "highlights": [
-            "Observed how restaurants generate movement but do not always create places for people to stay.",
-            "Identified conflicts between pedestrian activity and sidewalk parking.",
-            "Examined street life, mobility, land use and the existing building / façade condition.",
-            "Used everyday behaviour as a starting point for identifying public-space opportunities.",
+            "TODO: finding on street life and activities",
+            "TODO: finding on mobility and access",
+            "TODO: finding on land use and building fabric",
         ],
-        "role": "Individual academic project",
-        "tools": "Site observation, mapping, AutoCAD, Adobe Photoshop, Adobe Illustrator",
+        "role": "TODO",
+        "tools": "TODO",
         "link": "",
         "folder": "TKDT2",
-        "files": [
-            "1.png",
-            "2.png",
-        ],
-        "columns": 1,
+        "files": ["1.png", "2.png"],
     },
 
     "SALA_GROUP": {
-        "title": "Sala: Urban Infrastructure Strategy",
-        "meta": "Group Urban Project | Urban Systems & Infrastructure | UAH",
-        "summary": (
-            "A group study of Sala that approaches infrastructure as a set of connected urban systems. "
-            "The project links energy, telecommunications, wastewater, rainwater management and mobility "
-            "to the wider district structure."
-        ),
+        "title": "TODO: project title (Sala)",
+        "meta": "Urban analysis | Group project | TODO: year",
+        "summary": "TODO: 2-3 sentences on what the group studied and what you found.",
         "highlights": [
-            "Developed a ring-based electrical distribution strategy.",
-            "Explored rooftop and pond-based solar energy opportunities.",
-            "Planned FTTx / central-office allocation as part of the district's digital infrastructure.",
-            "Used zoning and grading to support gravity-based wastewater systems.",
-            "Integrated rainwater ponds, pocket gardens and bicycle infrastructure into the urban system.",
+            "TODO: finding 1",
+            "TODO: finding 2",
         ],
-        "role": "Group project — contributed to urban infrastructure analysis and system development",
-        "tools": "AutoCAD, Adobe Illustrator, Adobe Photoshop, system mapping",
+        "role": "TODO: group of N, and your part",
+        "tools": "TODO",
         "link": "",
         "folder": "SALA_GROUP",
         "files": None,
-        "columns": 2,
     },
 
     "TKDT1": {
-        "title": "Bến Thành: Transit-Oriented Development",
-        "meta": "Urban Design Studio 1 | TOD | UAH",
-        "summary": (
-            "An academic TOD study around Bến Thành Metro Station, examining the relationship "
-            "between transit, land use, public space and pedestrian movement within the station area."
-        ),
+        "title": "Transit-Oriented Development at Bến Thành",
+        "meta": "Urban Design Studio 1 | TOD | UAH | TODO: year",
+        "summary": "TODO: 2-3 sentences on the station area and your TOD approach.",
         "highlights": [
-            "Studied the pedestrian catchment around Bến Thành Metro Station.",
-            "Examined the relationship between commercial, residential and office functions.",
-            "Investigated pedestrian connections between major destinations around the station area.",
-            "Explored how public-space structure and station access affect the experience of the TOD area.",
+            "TODO: walking catchment around the station",
+            "TODO: density and land-use mix",
+            "TODO: public space and connections",
         ],
-        "role": "Individual academic project",
-        "tools": "AutoCAD, SketchUp, Adobe Photoshop, Adobe Illustrator",
+        "role": "TODO",
+        "tools": "TODO",
         "link": "",
         "folder": "TKDT1",
         "files": [
@@ -275,55 +334,38 @@ PROJECTS = {
             "BEN_THANH_1.pdf",
             "BEN_THANH_2.pdf",
         ],
-        "columns": 1,
     },
-
-    # -----------------------------------------------------------------
-    # DATA & SUSTAINABILITY
-    # -----------------------------------------------------------------
 
     "AGODA": {
         "title": "Agoda Business Analytics Web App",
-        "meta": "Business Analytics | Data Project",
-        "summary": (
-            "A data project that turns a business dataset into an interactive analytical web app. "
-            "The project demonstrates a workflow from data preparation and analysis to communicating "
-            "findings through an accessible interface."
-        ),
+        "meta": "Business analytics | Data project | TODO: year",
+        "summary": "TODO: 2-3 sentences on the question, the data, and what the web app shows.",
         "highlights": [
-            "Worked with structured business data and explored patterns in the dataset.",
-            "Used Python-based data processing and analysis.",
-            "Translated analytical results into an interactive web interface.",
-            "Focused on communicating findings clearly rather than only producing charts.",
+            "TODO: data source and size",
+            "TODO: main analysis",
+            "TODO: one key insight",
         ],
-        "role": "Individual data project",
-        "tools": "Python, pandas, Streamlit",
-        # Add the live app or GitHub repository here when ready.
+        "role": "TODO",
+        "tools": "TODO: e.g. Python, pandas, Streamlit",
         "link": "",
         "folder": "AGODA",
         "files": None,
-        "columns": 2,
     },
 
     "EDGE": {
         "title": "EDGE Green Building Assessment",
-        "meta": "Green Building Assessment | IFC EDGE",
-        "summary": (
-            "A building-performance study using the IFC EDGE framework to test architectural "
-            "and environmental strategies across energy, water and materials."
-        ),
+        "meta": "Green building certification (IFC EDGE) | TODO: year",
+        "summary": "TODO: 2-3 sentences on the building and what the EDGE assessment showed.",
         "highlights": [
-            "Evaluated energy-saving strategies and on-site photovoltaic potential.",
-            "Studied greywater, laundry wastewater and rainwater recovery strategies.",
-            "Explored material choices in relation to embodied energy.",
-            "Used quantitative performance results to test and refine design decisions.",
+            "TODO: energy savings vs. base case (%)",
+            "TODO: water savings (%)",
+            "TODO: embodied energy savings in materials (%)",
         ],
-        "role": "Academic project",
-        "tools": "IFC EDGE App, architectural analysis",
+        "role": "TODO",
+        "tools": "TODO: e.g. EDGE App",
         "link": "",
         "folder": "EDGE",
         "files": None,
-        "columns": 3,
     },
 }
 
@@ -336,50 +378,32 @@ SECTIONS = {
     "Design": {
         "url": "design",
         "intro": "Concept development and spatial design, from site reading to form.",
-        "projects": [
-            "DA_BCKG",
-            "TKDT2_DESIGN",
-        ],
+        "projects": ["DA_BCKG", "TKDT2_DESIGN"],
     },
     "Urban Analysis": {
         "url": "urban-analysis",
-        "intro": (
-            "Reading how cities work through streets, mobility, land use, "
-            "infrastructure and everyday activity."
-        ),
-        "projects": [
-            "TKDT2_ANALYSIS",
-            "SALA_GROUP",
-            "TKDT1",
-        ],
+        "intro": "Reading how cities work: streets, transit, land use, and how places change.",
+        "projects": ["TKDT2_ANALYSIS", "SALA_GROUP", "TKDT1"],
     },
     "Data & Sustainability": {
         "url": "data-sustainability",
-        "intro": (
-            "Building an analytical edge through data, quantitative thinking "
-            "and environmental performance."
-        ),
-        "projects": [
-            "AGODA",
-            "EDGE",
-        ],
+        "intro": "Tools beyond drawing: data analysis and green building performance.",
+        "projects": ["AGODA", "EDGE"],
     },
 }
 
 
 IMAGE_TYPES = {".png", ".jpg", ".jpeg", ".webp"}
-PDF_RENDER_WIDTH = 2400
+PDF_RENDER_WIDTH = 1800
 
 
 # =====================================================================
 # 6. HELPERS
 # =====================================================================
 
-def natural_sort_key(file_path: Path):
+def natural_sort_key(file_path):
     """Sort 1.png, 2.png, ..., 10.png naturally."""
-
     parts = re.split(r"(\d+)", file_path.name)
-
     return [
         int(part) if part.isdigit() else part.lower()
         for part in parts
@@ -387,18 +411,14 @@ def natural_sort_key(file_path: Path):
 
 
 def get_project_files(project):
-    """Return the files to display for a project."""
-
+    """Return explicit project files or all images in its folder."""
     folder = DATA_DIR / project["folder"]
+
+    if project["files"] is not None:
+        return [folder / file_name for file_name in project["files"]]
 
     if not folder.exists():
         return []
-
-    if project["files"] is not None:
-        return [
-            folder / file_name
-            for file_name in project["files"]
-        ]
 
     images = [
         file_path
@@ -410,73 +430,206 @@ def get_project_files(project):
     return sorted(images, key=natural_sort_key)
 
 
-@st.cache_data(show_spinner="Loading drawings...")
-def render_pdf_pages(pdf_path_str):
-    """Render all pages of a PDF as cached JPEG images."""
-
-    page_images = []
-
+@st.cache_data(show_spinner="Loading board...")
+def render_pdf_page(pdf_path_str, page_index):
+    """Render only the requested PDF page, rather than the whole PDF."""
     with pymupdf.open(pdf_path_str) as pdf:
-        for page in pdf:
-            zoom = PDF_RENDER_WIDTH / page.rect.width
-            pixmap = page.get_pixmap(
-                matrix=pymupdf.Matrix(zoom, zoom)
-            )
-            page_images.append(
-                pixmap.tobytes(
-                    "jpeg",
-                    jpg_quality=85,
-                )
-            )
+        if page_index >= len(pdf):
+            return None
 
-    return page_images
+        page = pdf[page_index]
+        zoom = PDF_RENDER_WIDTH / page.rect.width
 
-
-def show_file(file_path: Path):
-    """Display one image or PDF."""
-
-    if not file_path.exists():
-        st.warning(
-            f"File not found: {file_path.relative_to(DATA_DIR)}"
+        pixmap = page.get_pixmap(
+            matrix=pymupdf.Matrix(zoom, zoom),
         )
-        return
 
-    if file_path.suffix.lower() == ".pdf":
-        for page_image in render_pdf_pages(str(file_path)):
-            st.image(page_image, width="stretch")
-    else:
-        st.image(str(file_path), width="stretch")
+        return pixmap.tobytes(
+            "jpeg",
+            jpg_quality=88,
+        )
 
 
-def show_files(files, n_columns):
-    """Display project boards in rows."""
+@st.cache_data(show_spinner=False)
+def get_pdf_page_count(pdf_path_str):
+    """Return the number of pages in a PDF."""
+    with pymupdf.open(pdf_path_str) as pdf:
+        return len(pdf)
 
-    if not files:
+
+def build_journey_items(files):
+    """
+    Turn project files into a single sequence:
+    image -> one item
+    PDF -> one item per page
+    """
+
+    items = []
+
+    for file_path in files:
+        if not file_path.exists():
+            items.append(
+                {
+                    "type": "missing",
+                    "path": file_path,
+                    "page": None,
+                }
+            )
+            continue
+
+        if file_path.suffix.lower() == ".pdf":
+            page_count = get_pdf_page_count(str(file_path))
+
+            for page_index in range(page_count):
+                items.append(
+                    {
+                        "type": "pdf",
+                        "path": file_path,
+                        "page": page_index,
+                    }
+                )
+        else:
+            items.append(
+                {
+                    "type": "image",
+                    "path": file_path,
+                    "page": None,
+                }
+            )
+
+    return items
+
+
+def show_journey(project_key):
+    """
+    One-board-at-a-time project journey.
+    Previous / Next controls create a book-like page transition.
+    """
+
+    project = PROJECTS[project_key]
+    files = get_project_files(project)
+    items = build_journey_items(files)
+
+    if not items:
         st.info("Project boards will be added here.")
         return
 
-    for row_start in range(0, len(files), n_columns):
-        row_files = files[row_start:row_start + n_columns]
-        columns = st.columns(n_columns, gap="medium")
+    state_key = f"journey_index_{project_key}"
 
-        for column, file_path in zip(columns, row_files):
-            with column:
-                show_file(file_path)
+    if state_key not in st.session_state:
+        st.session_state[state_key] = 0
+
+    current_index = st.session_state[state_key]
+    total_items = len(items)
+
+    # Keep state safe if files change.
+    current_index = max(
+        0,
+        min(current_index, total_items - 1),
+    )
+    st.session_state[state_key] = current_index
+
+    current_item = items[current_index]
+
+    st.markdown(
+        '<div class="journey-shell">',
+        unsafe_allow_html=True,
+    )
+
+    st.markdown(
+        f'<div class="journey-progress">'
+        f'BOARD {current_index + 1:02d} / {total_items:02d}'
+        f'</div>',
+        unsafe_allow_html=True,
+    )
+
+    relative_name = current_item["path"].relative_to(DATA_DIR).as_posix()
+
+    if current_item["type"] == "pdf" and get_pdf_page_count(
+        str(current_item["path"])
+    ) > 1:
+        relative_name += f" · page {current_item['page'] + 1}"
+
+    st.markdown(
+        f'<div class="journey-file">{relative_name}</div>',
+        unsafe_allow_html=True,
+    )
+
+    # Narrow center column -> the board no longer fills the screen.
+    left, center, right = st.columns(
+        [1.0, 5.8, 1.0],
+        gap="medium",
+    )
+
+    with left:
+        if current_index > 0:
+            if st.button(
+                "←",
+                key=f"prev_{project_key}",
+                use_container_width=True,
+            ):
+                st.session_state[state_key] -= 1
+                st.rerun()
+
+    with center:
+
+        if current_item["type"] == "missing":
+
+            st.warning(
+                f"File not found: "
+                f"{current_item['path'].relative_to(DATA_DIR)}"
+            )
+
+        elif current_item["type"] == "pdf":
+
+            image_bytes = render_pdf_page(
+                str(current_item["path"]),
+                current_item["page"],
+            )
+
+            if image_bytes is not None:
+                st.image(
+                    image_bytes,
+                    width="stretch",
+                )
+
+        else:
+
+            st.image(
+                str(current_item["path"]),
+                width="stretch",
+            )
+
+    with right:
+        if current_index < total_items - 1:
+            if st.button(
+                "→",
+                key=f"next_{project_key}",
+                use_container_width=True,
+            ):
+                st.session_state[state_key] += 1
+                st.rerun()
+
+    st.markdown(
+        "</div>",
+        unsafe_allow_html=True,
+    )
 
 
 def show_project(project_key):
-    """Render one project and its boards."""
-
     project = PROJECTS[project_key]
 
-    st.subheader(project["title"])
+    st.header(project["title"])
 
     st.markdown(
         f'<div class="project-meta">{project["meta"]}</div>',
         unsafe_allow_html=True,
     )
 
-    text_column, facts_column = st.columns([2.1, 1], gap="large")
+    text_column, facts_column = st.columns(
+        [2, 1],
+        gap="large",
+    )
 
     with text_column:
         st.write(project["summary"])
@@ -485,6 +638,7 @@ def show_project(project_key):
             st.markdown(f"- {item}")
 
     with facts_column:
+
         st.markdown(
             '<div class="project-label">Role</div>',
             unsafe_allow_html=True,
@@ -501,28 +655,23 @@ def show_project(project_key):
             st.link_button(
                 "Open project",
                 project["link"],
-                use_container_width=True,
             )
 
-    st.markdown("")
-    show_files(get_project_files(project), project["columns"])
+    show_journey(project_key)
+
     st.divider()
 
 
 def show_contact():
-    """Render contact details and CV download."""
-
-    contact_items = [
-        PROFILE["location"],
-        f"[{PROFILE['email']}](mailto:{PROFILE['email']})",
-    ]
+    contact = (
+        f"{PROFILE['location']} · "
+        f"[{PROFILE['email']}](mailto:{PROFILE['email']})"
+    )
 
     if PROFILE["linkedin"]:
-        contact_items.append(
-            f"[LinkedIn]({PROFILE['linkedin']})"
-        )
+        contact += f" · [LinkedIn]({PROFILE['linkedin']})"
 
-    st.markdown(" · ".join(contact_items))
+    st.markdown(contact)
 
     cv_file = PROFILE["cv_file"]
 
@@ -537,89 +686,60 @@ def show_contact():
 
 def show_footer():
     st.markdown(
-        f"""
-        <div class="footer">
-            {PROFILE["name"]} · {PROFILE["email"]} ·
-            Built with Python and Streamlit.
-        </div>
-        """,
+        f'<div class="footer">'
+        f'{PROFILE["name"]} · {PROFILE["email"]} · '
+        f'This site is built with Python and Streamlit.'
+        f'</div>',
         unsafe_allow_html=True,
     )
 
 
 # =====================================================================
-# 7. HOME
+# 7. PAGES
 # =====================================================================
 
 def show_home():
 
-    text_column, image_column = st.columns([1.15, 1], gap="large")
+    text_column, image_column = st.columns(
+        [1, 1],
+        gap="large",
+    )
 
     with text_column:
+
         st.title(PROFILE["name"])
         st.subheader(PROFILE["headline"])
-        st.markdown("")
-
+        st.write(PROFILE["pitch"])
         st.markdown(
-            f"""
-            <div class="hero-note">
-                {PROFILE["pitch"]}
-            </div>
-            """,
-            unsafe_allow_html=True,
+            f"**Looking for:** {PROFILE['looking_for']}"
         )
-
-        st.markdown("")
-        st.markdown(f"**Looking for:** {PROFILE['looking_for']}")
-        st.markdown("")
         show_contact()
 
     with image_column:
+
         if PROFILE["cover_image"].exists():
             st.image(
                 str(PROFILE["cover_image"]),
                 width="stretch",
             )
-        else:
-            st.info("Add the cover image to data/TKDT2/1.png")
 
     st.divider()
 
-    st.header("Selected Work")
-    st.write(
-        "A selection of academic work across design, "
-        "urban analysis, data and sustainability."
-    )
-
-    st.markdown("")
-
-    section_columns = st.columns(len(SECTIONS), gap="medium")
-
-    for index, (column, (section_name, section)) in enumerate(
-        zip(section_columns, SECTIONS.items()),
-        start=1,
+    for column, (section_name, section) in zip(
+        st.columns(len(SECTIONS)),
+        SECTIONS.items(),
     ):
+
         with column:
-            st.markdown(
-                f"""
-                <div class="category-card">
-                    <div class="category-number">
-                        {index:02d}
-                    </div>
 
-                    <div class="category-title">
-                        {section_name}
-                    </div>
+            st.subheader(section_name)
+            st.caption(section["intro"])
 
-                    <div class="category-text">
-                        {section["intro"]}
-                    </div>
-                </div>
-                """,
-                unsafe_allow_html=True,
-            )
+            for project_key in section["projects"]:
+                st.markdown(
+                    f"- {PROJECTS[project_key]['title']}"
+                )
 
-            st.markdown("")
             st.page_link(
                 SECTION_PAGES[section_name],
                 label="View projects",
@@ -627,25 +747,8 @@ def show_home():
 
     st.divider()
 
-    st.header("Approach")
-    st.write(
-        "My work starts from spatial and human observation, "
-        "then uses analysis to understand how places function and change."
-    )
-    st.write(
-        "I am interested in how urban design can work together with "
-        "data and quantitative methods — not as a replacement for spatial "
-        "thinking, but as another way to understand patterns, test possibilities "
-        "and support urban decision-making."
-    )
-
-    st.divider()
     show_footer()
 
-
-# =====================================================================
-# 8. SECTION PAGES
-# =====================================================================
 
 def show_section(section_name):
 
@@ -662,12 +765,15 @@ def show_section(section_name):
 
 
 # =====================================================================
-# 9. NAVIGATION
+# 8. NAVIGATION
 # =====================================================================
 
 SECTION_PAGES = {
     section_name: st.Page(
-        partial(show_section, section_name),
+        partial(
+            show_section,
+            section_name,
+        ),
         title=section_name,
         url_path=section["url"],
     )
@@ -680,9 +786,10 @@ home_page = st.Page(
     default=True,
 )
 
-pg = st.navigation(
-    [home_page, *SECTION_PAGES.values()],
+st.navigation(
+    [
+        home_page,
+        *SECTION_PAGES.values(),
+    ],
     position="top",
-)
-
-pg.run()
+).run()
