@@ -25,7 +25,6 @@ st.set_page_config(
 st.markdown(
     """
     <style>
-    /* ---------- General ---------- */
     .block-container {
         max-width: 1380px;
         padding-top: 2.5rem;
@@ -36,7 +35,6 @@ st.markdown(
         background: #ffffff;
     }
 
-    /* ---------- Typography ---------- */
     h1, h2, h3 {
         letter-spacing: -0.02em;
     }
@@ -54,18 +52,6 @@ st.markdown(
         font-size: 1.35rem !important;
     }
 
-    /* ---------- Navigation ---------- */
-    [data-testid="stSidebarNav"] {
-        display: none;
-    }
-
-    /* ---------- Project divider ---------- */
-    hr {
-        margin-top: 3rem;
-        margin-bottom: 3rem;
-    }
-
-    /* ---------- Small metadata text ---------- */
     .project-meta {
         color: #6b7280;
         font-size: 0.95rem;
@@ -81,14 +67,12 @@ st.markdown(
         margin-bottom: 0.25rem;
     }
 
-    /* ---------- Home intro ---------- */
     .hero-note {
         color: #6b7280;
         font-size: 1rem;
         line-height: 1.7;
     }
 
-    /* ---------- Cards ---------- */
     .category-card {
         border: 1px solid #e5e7eb;
         border-radius: 12px;
@@ -116,7 +100,6 @@ st.markdown(
         font-size: 0.92rem;
     }
 
-    /* ---------- Footer ---------- */
     .footer {
         color: #9ca3af;
         font-size: 0.85rem;
@@ -139,12 +122,14 @@ PROFILE = {
     "name": "Nguyễn Nhật Minh Thư",
     "headline": "Urban Design student | University of Architecture of Ho Chi Minh City",
     "pitch": (
-        "I work across urban design, spatial thinking and urban analysis, "
-        "with an emerging interest in data-driven approaches to urban transformation."
+        "A spatial and design-oriented portfolio with work across urban design, "
+        "urban analysis and infrastructure, complemented by training in Data Science "
+        "and Machine Learning."
     ),
     "looking_for": "Internship or student position in urban design and planning",
     "location": "Ho Chi Minh City, Vietnam",
     "email": "nguyennhatminhthu19@gmail.com",
+    # Add your LinkedIn URL here when ready.
     "linkedin": "",
     "cv_file": DATA_DIR / "CV.pdf",
     "cover_image": DATA_DIR / "TKDT2" / "1.png",
@@ -153,12 +138,6 @@ PROFILE = {
 
 # =====================================================================
 # 4. PROJECTS
-#
-# "folder": folder inside data/
-# "files": file names in display order
-#          None = every image in the folder, naturally sorted
-# "columns": number of boards/images per row
-# "link": external project link, if available
 # =====================================================================
 
 PROJECTS = {
@@ -168,17 +147,17 @@ PROJECTS = {
     # -----------------------------------------------------------------
 
     "DA_BCKG": {
-        "title": "Spatial Composition: Concept Development",
+        "title": "Spatial Composition",
         "meta": "Concept Design Studio | UAH",
         "summary": (
-            "An early design exercise focused on spatial composition, "
-            "site reading and the relationship between movement, space and form. "
-            "The project explores how an initial spatial idea can be developed into a coherent design language."
+            "A concept-focused design exercise exploring how spatial ideas are "
+            "developed from an initial reading into a coherent composition. "
+            "The work focuses on relationships between movement, space, hierarchy and form."
         ),
         "highlights": [
-            "Developed the project from site observation and conceptual thinking.",
-            "Explored spatial hierarchy, composition and relationships between different areas.",
-            "Translated an abstract concept into drawings, models and architectural representation.",
+            "Developed a design concept through spatial reading and composition.",
+            "Explored hierarchy and relationships between different spatial elements.",
+            "Translated conceptual thinking into drawings, models and architectural representation.",
         ],
         "role": "Individual academic project",
         "tools": "AutoCAD, SketchUp, Adobe Photoshop, Adobe Illustrator",
@@ -198,16 +177,16 @@ PROJECTS = {
         "title": "Phan Slip Long",
         "meta": "Urban Design Studio 2 | Urban Design Proposal | UAH",
         "summary": (
-            "A neighbourhood-scale urban design proposal in Phan Xích Long, "
-            "developed around the everyday relationship between streets, restaurants, "
-            "movement and public life. The proposal questions how existing walls and "
-            "street edges can be reworked to create places for people to stay, not only pass through."
+            "A neighbourhood-scale urban design proposal in Phan Xích Long that "
+            "looks at how restaurants, movement and street edges shape everyday public life. "
+            "The proposal asks how the existing street condition can create more opportunities "
+            "for people to stay, rather than only pass through."
         ),
         "highlights": [
             "Developed the concept around enhancing existing walls and interrupting visual consistency.",
-            "Proposed a linear public layer below ground as an extension of the street experience.",
+            "Proposed a linear underground public layer as an extension of the street experience.",
             "Introduced small public pockets for different forms of lingering, including elderly users, children and teenagers.",
-            "Used a central skylight / glass strip to maintain a connection between the underground public space and the street above.",
+            "Used a central skylight / glass strip to maintain a visual relationship with the street above.",
         ],
         "role": "Individual academic project",
         "tools": "AutoCAD, SketchUp, Adobe Photoshop, Adobe Illustrator",
@@ -222,21 +201,20 @@ PROJECTS = {
         "columns": 1,
     },
 
-
     # -----------------------------------------------------------------
     # URBAN ANALYSIS
     # -----------------------------------------------------------------
 
     "TKDT2_ANALYSIS": {
-        "title": "Phan Slip Long: Site Analysis",
+        "title": "Phan Xích Long: Site Analysis",
         "meta": "Urban Design Studio 2 | Urban Analysis | UAH",
         "summary": (
             "The analysis examines how Phan Xích Long works as an everyday urban environment, "
-            "looking beyond physical form to understand how people move, eat, park, gather and leave. "
-            "The findings became the basis for the later design intervention."
+            "looking at movement, eating, parking, gathering and staying. "
+            "These observations were used to identify opportunities for the later design intervention."
         ),
         "highlights": [
-            "Observed how restaurants generate movement but often do not create places for people to stay.",
+            "Observed how restaurants generate movement but do not always create places for people to stay.",
             "Identified conflicts between pedestrian activity and sidewalk parking.",
             "Examined street life, mobility, land use and the existing building / façade condition.",
             "Used everyday behaviour as a starting point for identifying public-space opportunities.",
@@ -256,9 +234,9 @@ PROJECTS = {
         "title": "Sala: Urban Infrastructure Strategy",
         "meta": "Group Urban Project | Urban Systems & Infrastructure | UAH",
         "summary": (
-            "A group study of Sala focused on how infrastructure systems can be integrated "
-            "with the urban structure rather than treated as isolated technical networks. "
-            "The project explored energy, telecommunications, wastewater, rainwater and mobility as interconnected systems."
+            "A group study of Sala that approaches infrastructure as a set of connected urban systems. "
+            "The project links energy, telecommunications, wastewater, rainwater management and mobility "
+            "to the wider district structure."
         ),
         "highlights": [
             "Developed a ring-based electrical distribution strategy.",
@@ -279,15 +257,14 @@ PROJECTS = {
         "title": "Bến Thành: Transit-Oriented Development",
         "meta": "Urban Design Studio 1 | TOD | UAH",
         "summary": (
-            "An academic TOD exercise around Bến Thành Metro Station, "
-            "examining the relationship between transit, land use, public space and pedestrian movement. "
-            "The project investigates how a major station can connect different urban activities and districts."
+            "An academic TOD study around Bến Thành Metro Station, examining the relationship "
+            "between transit, land use, public space and pedestrian movement within the station area."
         ),
         "highlights": [
             "Studied the pedestrian catchment around Bến Thành Metro Station.",
-            "Examined relationships between commercial, residential and office functions.",
-            "Investigated pedestrian connections between major urban destinations.",
-            "Explored how public space and station access influence the quality of the TOD area.",
+            "Examined the relationship between commercial, residential and office functions.",
+            "Investigated pedestrian connections between major destinations around the station area.",
+            "Explored how public-space structure and station access affect the experience of the TOD area.",
         ],
         "role": "Individual academic project",
         "tools": "AutoCAD, SketchUp, Adobe Photoshop, Adobe Illustrator",
@@ -295,12 +272,11 @@ PROJECTS = {
         "folder": "TKDT1",
         "files": [
             "tkdt1-TASK2.png",
-            "To 1 BEN THANH.pdf",
-            "To 2 Ben Thanh.pdf",
+            "BEN_THANH_1.pdf",
+            "BEN_THANH_2.pdf",
         ],
         "columns": 1,
     },
-
 
     # -----------------------------------------------------------------
     # DATA & SUSTAINABILITY
@@ -310,18 +286,19 @@ PROJECTS = {
         "title": "Agoda Business Analytics Web App",
         "meta": "Business Analytics | Data Project",
         "summary": (
-            "A data analytics project focused on turning a structured business dataset "
-            "into an interactive web-based analysis. The project demonstrates the ability "
-            "to move from data preparation and exploration to communicating insights through an application."
+            "A data project that turns a business dataset into an interactive analytical web app. "
+            "The project demonstrates a workflow from data preparation and analysis to communicating "
+            "findings through an accessible interface."
         ),
         "highlights": [
-            "Worked with structured business data and performed exploratory analysis.",
+            "Worked with structured business data and explored patterns in the dataset.",
             "Used Python-based data processing and analysis.",
             "Translated analytical results into an interactive web interface.",
-            "Focused on communicating patterns and findings clearly rather than only producing charts.",
+            "Focused on communicating findings clearly rather than only producing charts.",
         ],
         "role": "Individual data project",
         "tools": "Python, pandas, Streamlit",
+        # Add the live app or GitHub repository here when ready.
         "link": "",
         "folder": "AGODA",
         "files": None,
@@ -332,15 +309,14 @@ PROJECTS = {
         "title": "EDGE Green Building Assessment",
         "meta": "Green Building Assessment | IFC EDGE",
         "summary": (
-            "A building-performance study using the IFC EDGE framework to examine "
-            "energy, water and material-related strategies. The project connects architectural "
-            "decisions with measurable environmental performance."
+            "A building-performance study using the IFC EDGE framework to test architectural "
+            "and environmental strategies across energy, water and materials."
         ),
         "highlights": [
             "Evaluated energy-saving strategies and on-site photovoltaic potential.",
-            "Studied water-efficiency and wastewater / greywater recovery strategies.",
-            "Explored material choices and their relationship with embodied energy.",
-            "Used a quantitative performance framework to test design decisions.",
+            "Studied greywater, laundry wastewater and rainwater recovery strategies.",
+            "Explored material choices in relation to embodied energy.",
+            "Used quantitative performance results to test and refine design decisions.",
         ],
         "role": "Academic project",
         "tools": "IFC EDGE App, architectural analysis",
@@ -359,15 +335,12 @@ PROJECTS = {
 SECTIONS = {
     "Design": {
         "url": "design",
-        "intro": (
-            "Concept development and spatial design, from site reading to form."
-        ),
+        "intro": "Concept development and spatial design, from site reading to form.",
         "projects": [
             "DA_BCKG",
             "TKDT2_DESIGN",
         ],
     },
-
     "Urban Analysis": {
         "url": "urban-analysis",
         "intro": (
@@ -380,7 +353,6 @@ SECTIONS = {
             "TKDT1",
         ],
     },
-
     "Data & Sustainability": {
         "url": "data-sustainability",
         "intro": (
@@ -404,12 +376,8 @@ PDF_RENDER_WIDTH = 2400
 # =====================================================================
 
 def natural_sort_key(file_path: Path):
-    """
-    Sort files naturally:
-    1.png, 2.png, 3.png, ..., 10.png
-    instead of
-    1.png, 10.png, 2.png
-    """
+    """Sort 1.png, 2.png, ..., 10.png naturally."""
+
     parts = re.split(r"(\d+)", file_path.name)
 
     return [
@@ -419,10 +387,7 @@ def natural_sort_key(file_path: Path):
 
 
 def get_project_files(project):
-    """
-    Return the project files in the order defined in PROJECTS.
-    If files=None, automatically discover all images in the folder.
-    """
+    """Return the files to display for a project."""
 
     folder = DATA_DIR / project["folder"]
 
@@ -447,22 +412,16 @@ def get_project_files(project):
 
 @st.cache_data(show_spinner="Loading drawings...")
 def render_pdf_pages(pdf_path_str):
-    """
-    Render every PDF page into a JPEG.
-    Streamlit caches the result so the PDF does not have to
-    be rendered again on every interaction.
-    """
+    """Render all pages of a PDF as cached JPEG images."""
 
     page_images = []
 
     with pymupdf.open(pdf_path_str) as pdf:
         for page in pdf:
             zoom = PDF_RENDER_WIDTH / page.rect.width
-
             pixmap = page.get_pixmap(
                 matrix=pymupdf.Matrix(zoom, zoom)
             )
-
             page_images.append(
                 pixmap.tobytes(
                     "jpeg",
@@ -474,9 +433,7 @@ def render_pdf_pages(pdf_path_str):
 
 
 def show_file(file_path: Path):
-    """
-    Display a single image or PDF.
-    """
+    """Display one image or PDF."""
 
     if not file_path.exists():
         st.warning(
@@ -486,48 +443,29 @@ def show_file(file_path: Path):
 
     if file_path.suffix.lower() == ".pdf":
         for page_image in render_pdf_pages(str(file_path)):
-            st.image(
-                page_image,
-                width="stretch",
-            )
-
+            st.image(page_image, width="stretch")
     else:
-        st.image(
-            str(file_path),
-            width="stretch",
-        )
+        st.image(str(file_path), width="stretch")
 
 
 def show_files(files, n_columns):
-    """
-    Display project boards in rows.
-    """
+    """Display project boards in rows."""
 
     if not files:
         st.info("Project boards will be added here.")
         return
 
     for row_start in range(0, len(files), n_columns):
-
-        row_files = files[
-            row_start:row_start + n_columns
-        ]
-
-        columns = st.columns(
-            n_columns,
-            gap="medium",
-        )
+        row_files = files[row_start:row_start + n_columns]
+        columns = st.columns(n_columns, gap="medium")
 
         for column, file_path in zip(columns, row_files):
-
             with column:
                 show_file(file_path)
 
 
 def show_project(project_key):
-    """
-    Render one complete project.
-    """
+    """Render one project and its boards."""
 
     project = PROJECTS[project_key]
 
@@ -538,24 +476,15 @@ def show_project(project_key):
         unsafe_allow_html=True,
     )
 
-    text_column, facts_column = st.columns(
-        [2.1, 1],
-        gap="large",
-    )
+    text_column, facts_column = st.columns([2.1, 1], gap="large")
 
     with text_column:
-
         st.write(project["summary"])
 
-        st.markdown("")
-
         for item in project["highlights"]:
-            st.markdown(
-                f"- {item}"
-            )
+            st.markdown(f"- {item}")
 
     with facts_column:
-
         st.markdown(
             '<div class="project-label">Role</div>',
             unsafe_allow_html=True,
@@ -576,19 +505,12 @@ def show_project(project_key):
             )
 
     st.markdown("")
-
-    show_files(
-        get_project_files(project),
-        project["columns"],
-    )
-
+    show_files(get_project_files(project), project["columns"])
     st.divider()
 
 
 def show_contact():
-    """
-    Render location, email, LinkedIn and CV download.
-    """
+    """Render contact details and CV download."""
 
     contact_items = [
         PROFILE["location"],
@@ -600,14 +522,11 @@ def show_contact():
             f"[LinkedIn]({PROFILE['linkedin']})"
         )
 
-    st.markdown(
-        " · ".join(contact_items)
-    )
+    st.markdown(" · ".join(contact_items))
 
     cv_file = PROFILE["cv_file"]
 
     if cv_file.exists():
-
         st.download_button(
             "Download CV",
             data=cv_file.read_bytes(),
@@ -617,7 +536,6 @@ def show_contact():
 
 
 def show_footer():
-
     st.markdown(
         f"""
         <div class="footer">
@@ -635,21 +553,11 @@ def show_footer():
 
 def show_home():
 
-    text_column, image_column = st.columns(
-        [1.15, 1],
-        gap="large",
-    )
+    text_column, image_column = st.columns([1.15, 1], gap="large")
 
     with text_column:
-
-        st.title(
-            PROFILE["name"]
-        )
-
-        st.subheader(
-            PROFILE["headline"]
-        )
-
+        st.title(PROFILE["name"])
+        st.subheader(PROFILE["headline"])
         st.markdown("")
 
         st.markdown(
@@ -662,34 +570,22 @@ def show_home():
         )
 
         st.markdown("")
-
-        st.markdown(
-            f"**Looking for:** {PROFILE['looking_for']}"
-        )
-
+        st.markdown(f"**Looking for:** {PROFILE['looking_for']}")
         st.markdown("")
-
         show_contact()
 
     with image_column:
-
         if PROFILE["cover_image"].exists():
-
             st.image(
                 str(PROFILE["cover_image"]),
                 width="stretch",
             )
-
         else:
-
-            st.info(
-                "Add the cover image to data/TKDT2/1.png"
-            )
+            st.info("Add the cover image to data/TKDT2/1.png")
 
     st.divider()
 
     st.header("Selected Work")
-
     st.write(
         "A selection of academic work across design, "
         "urban analysis, data and sustainability."
@@ -697,18 +593,13 @@ def show_home():
 
     st.markdown("")
 
-    section_columns = st.columns(
-        len(SECTIONS),
-        gap="medium",
-    )
+    section_columns = st.columns(len(SECTIONS), gap="medium")
 
     for index, (column, (section_name, section)) in enumerate(
         zip(section_columns, SECTIONS.items()),
         start=1,
     ):
-
         with column:
-
             st.markdown(
                 f"""
                 <div class="category-card">
@@ -729,7 +620,6 @@ def show_home():
             )
 
             st.markdown("")
-
             st.page_link(
                 SECTION_PAGES[section_name],
                 label="View projects",
@@ -738,21 +628,18 @@ def show_home():
     st.divider()
 
     st.header("Approach")
-
     st.write(
-        "My current work sits between urban design and urban analysis, "
-        "with a growing interest in how spatial understanding can work "
-        "together with data and quantitative methods."
+        "My work starts from spatial and human observation, "
+        "then uses analysis to understand how places function and change."
     )
-
     st.write(
-        "The goal is not to replace design thinking with data, "
-        "but to use analysis as another way of understanding places, "
-        "testing possibilities and supporting urban decision-making."
+        "I am interested in how urban design can work together with "
+        "data and quantitative methods — not as a replacement for spatial "
+        "thinking, but as another way to understand patterns, test possibilities "
+        "and support urban decision-making."
     )
 
     st.divider()
-
     show_footer()
 
 
@@ -765,11 +652,7 @@ def show_section(section_name):
     section = SECTIONS[section_name]
 
     st.title(section_name)
-
-    st.write(
-        section["intro"]
-    )
-
+    st.write(section["intro"])
     st.divider()
 
     for project_key in section["projects"]:
@@ -784,10 +667,7 @@ def show_section(section_name):
 
 SECTION_PAGES = {
     section_name: st.Page(
-        partial(
-            show_section,
-            section_name,
-        ),
+        partial(show_section, section_name),
         title=section_name,
         url_path=section["url"],
     )
@@ -801,10 +681,7 @@ home_page = st.Page(
 )
 
 pg = st.navigation(
-    [
-        home_page,
-        *SECTION_PAGES.values(),
-    ],
+    [home_page, *SECTION_PAGES.values()],
     position="top",
 )
 
